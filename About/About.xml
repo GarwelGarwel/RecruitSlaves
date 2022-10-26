@@ -3,13 +3,17 @@
 <ModMetaData>
 	<name>Recruit Slaves</name>
 	<author>Garwel</author>
-	<url>https://github.com/GarwelGarwel/StartingTechLevel</url>
+	<url>https://github.com/GarwelGarwel/RecruitSlaves</url>
 	<packageId>Garwel.RecruitSlaves</packageId>
 	<supportedVersions>
 		<li>1.4</li>
 	</supportedVersions>
 	<description>Allows you to recruit slaves without first imprisoning them.</description>
 	<modDependencies>
+		<li>
+			<packageId>Ludeon.RimWorld.Ideology</packageId>
+			<displayName>Ideology</displayName>
+		</li>
 		<li>
 			<packageId>brrainz.harmony</packageId>
 			<displayName>Harmony</displayName>
@@ -20,5 +24,6 @@
 	<loadAfter>
 		<li>brrainz.harmony</li>
 		<li>Ludeon.RimWorld</li>
+		<li>Ludeon.RimWorld.Ideology</li>
 	</loadAfter>
 </ModMetaData>

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Defs>
+
+	<JobDef>
+		<defName>Job_RecruitSlave</defName>
+		<driverClass>RecruitSlaves.JobDriver_RecruitSlave</driverClass>
+		<reportString>recruiting TargetA.</reportString>
+		<allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+	</JobDef>
+
+</Defs>

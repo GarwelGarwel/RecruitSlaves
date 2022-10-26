@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Defs>
+
+    <WorkGiverDef>
+		<defName>WorkGiver_RecruitSlave</defName>
+		<label>recruit slave</label>
+		<verb>recruit</verb>
+		<gerund>recruiting</gerund>
+		<giverClass>RecruitSlaves.WorkGiver_RecruitSlave</giverClass>
+		<workType>Warden</workType>
+		<priorityInType>65</priorityInType>
+		<requiredCapacities>
+			<li>Talking</li>
+		</requiredCapacities>
+    </WorkGiverDef>
+
+</Defs>

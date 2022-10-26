@@ -12,6 +12,8 @@ namespace RecruitSlaves
                 return null;
             if (!ShouldTakeCareOfSlave(pawn, t))
                 return null;
+            if (pawn.IsSlave)
+                return null;
             Pawn target = t as Pawn;
             if (target.guest.slaveInteractionMode != DefOf.Recruit || target.Downed || !target.Awake())
                 return null;

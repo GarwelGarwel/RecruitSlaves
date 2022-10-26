@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Defs>
+
+	<SlaveInteractionModeDef>
+		<defName>Recruit</defName>
+		<label>recruit</label>
+		<listOrder>25</listOrder>
+		<description>Wardens will approach this slave and offer them to stay freely in the colony.</description>
+	</SlaveInteractionModeDef>
+
+</Defs>

@@ -1,9 +1,4 @@
 ﻿using RimWorld;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Verse;
 using Verse.AI;
 
@@ -18,7 +13,11 @@ namespace RecruitSlaves
             if (!ShouldTakeCareOfSlave(pawn, t))
                 return null;
             Pawn target = t as Pawn;
-            return null;
+            if (target.guest.slaveInteractionMode != DefOf.Recruit || target.Downed || !target.Awake())
+                return null;
+            Job job = JobMaker.MakeJob(DefOf.Job_RecruitSlave, target);
+            job.count = 1;
+            return job;
         }
     }
 }

@@ -18,6 +18,7 @@ namespace RecruitSlaves
                 Utility.Log($"Trying to MakeNewToils for {pawn} to recruit {Slave}, but there is no Ideology installed.", LogLevel.Error);
                 yield return null;
             }
+
             Utility.Log($"Recruiting {Slave}.");
             this.FailOnDestroyedOrNull(TargetIndex.A);
             this.FailOn(() => Slave.guest.slaveInteractionMode != DefOf.Recruit);
@@ -25,6 +26,7 @@ namespace RecruitSlaves
             this.FailOnAggroMentalState(TargetIndex.A);
             this.FailOnForbidden(TargetIndex.A);
             yield return Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.ClosestTouch).FailOn(() => !Slave.IsSlaveOfColony || !Slave.guest.SlaveIsSecure).FailOnSomeonePhysicallyInteracting(TargetIndex.A);
+        
             Toil toil = ToilMaker.MakeToil("TryRecruitSlave");
             toil.initAction = () => Utility.TryRecruit(pawn, Slave);
             toil.socialMode = RimWorld.RandomSocialMode.Off;

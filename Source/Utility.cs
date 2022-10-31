@@ -1,4 +1,5 @@
 ﻿using RimWorld;
+using UnityEngine;
 using Verse;
 
 namespace RecruitSlaves
@@ -14,10 +15,13 @@ namespace RecruitSlaves
     {
         public static float SuccessChance(Pawn recruiter, Pawn slave)
         {
-            float res = recruiter.GetStatValueForPawn(StatDefOf.NegotiationAbility, slave);
-            res *= slave.needs.mood.thoughts.TotalOpinionOffset(recruiter) / 200 + 1;
-            Log($"Success chance: {res.ToStringPercent()}");
-            return res;
+            float effort = recruiter.GetStatValue(StatDefOf.NegotiationAbility);
+            effort *= slave.needs.mood.thoughts.TotalOpinionOffset(recruiter) / 200 + 1;
+            Log($"Effort: {effort.ToStringPercent()}");
+            float difficulty = slave.GetStatValue(DefOf.RecruitmentDifficulty);
+            Log($"Difficulty: {difficulty.ToStringPercent()}");
+            //difficulty = Mathf.Max(difficulty, 0.2f);
+            return effort / difficulty;
         }
 
         public static void Recruit(Pawn recruiter, Pawn slave)
@@ -34,6 +38,7 @@ namespace RecruitSlaves
             Log($"Slave's resistance: {slave.guest.Resistance}; will: {slave.guest.will}");
             if (Rand.Chance(SuccessChance(recruiter, slave)))
                 Recruit(recruiter, slave);
+            else Log($"Failed to recruit {slave}.");
         }
 
         internal static void Log(string message, LogLevel logLevel = LogLevel.Message)

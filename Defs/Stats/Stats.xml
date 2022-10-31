@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Defs>
+
+	<StatDef>
+		<defName>RecruitmentDifficulty</defName>
+		<label>recruitment difficulty</label>
+		<description>How hard it is to recruit this slave to join the colony voluntarily. The actual difficulty depends also on the recruiter's negotiation ability and their relations with the slave.</description>
+		<category>PawnSocial</category>
+		<showOnSlavesOnly>true</showOnSlavesOnly>
+		<showIfModsLoaded>
+			<li>Ludeon.RimWorld.Ideology</li>
+		</showIfModsLoaded>
+		<displayPriorityInCategory>2520</displayPriorityInCategory>
+		<minValue>0.2</minValue>
+		<toStringStyle>PercentTwo</toStringStyle>
+		<parts>
+			<li Class="StatPart_Age" MayRequire="Ludeon.RimWorld.Biotech">
+				<useBiologicalYears>true</useBiologicalYears>
+				<humanlikeOnly>true</humanlikeOnly>
+				<curve>
+					<points>
+						<li>(3, 0.05)</li>
+						<li>(13, 0.8)</li>
+						<li>(18, 1)</li>
+					</points>
+				</curve>
+			</li>
+			<li Class="StatPart_Mood">
+				<factorFromMoodCurve>
+					<points>
+						<li>(-100, 2)</li>
+						<li>(0, 1)</li>
+						<li>(100, 0.5)</li>
+					</points>
+				</factorFromMoodCurve>
+			</li>
+			<li Class="StatPart_WildManOffset">
+				<offset>1</offset>
+			</li>
+		</parts>
+	</StatDef>
+
+</Defs>

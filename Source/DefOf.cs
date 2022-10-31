@@ -8,5 +8,6 @@ namespace RecruitSlaves
     {
         public static JobDef Job_RecruitSlave;
         public static SlaveInteractionModeDef Recruit;
+        public static StatDef RecruitmentDifficulty;
     }
 }

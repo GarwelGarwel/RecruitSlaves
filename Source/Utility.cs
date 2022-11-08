@@ -13,23 +13,28 @@ namespace RecruitSlaves
 
     public static class Utility
     {
+        public static Ideo NationPrimaryIdeo => Find.FactionManager.OfPlayer.ideos.PrimaryIdeo;
+
         public static float SuccessChance(Pawn recruiter, Pawn slave)
         {
             float effort = recruiter.GetStatValue(StatDefOf.NegotiationAbility);
             effort *= slave.needs.mood.thoughts.TotalOpinionOffset(recruiter) / 200 + 1;
-            Log($"Effort: {effort.ToStringPercent()}");
             float difficulty = slave.GetStatValue(DefOf.RecruitmentDifficulty);
-            Log($"Difficulty: {difficulty.ToStringPercent()}");
-            //difficulty = Mathf.Max(difficulty, 0.2f);
+            Log($"Effort: {effort.ToStringPercent()}. Difficulty: {difficulty.ToStringPercent()}. Recruitment chance: {(effort / difficulty).ToStringPercent()}");
             return effort / difficulty;
         }
 
         public static void Recruit(Pawn recruiter, Pawn slave)
         {
+#if DEBUG
+            Log($"The recruitment was successful, but not enforcing it due to being in DEBUG mode.");
+            return;
+#else
             slave.guest.SetGuestStatus(null);
             GenGuest.SlaveRelease(slave);
             if (slave.Faction.IsPlayer)
                 Messages.Message($"{slave} joined the colony as a free colonist.", slave, MessageTypeDefOf.PositiveEvent);
+#endif
         }
 
         public static void TryRecruit(Pawn recruiter, Pawn slave)

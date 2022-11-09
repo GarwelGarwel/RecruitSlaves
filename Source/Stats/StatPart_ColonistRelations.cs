@@ -1,4 +1,5 @@
 ﻿using RimWorld;
+using System.Linq;
 using Verse;
 
 namespace RecruitSlaves
@@ -7,10 +8,11 @@ namespace RecruitSlaves
     {
         public PawnRelationDef relation;
 
-        Pawn GetFirstRelationPawn(Pawn pawn) => pawn.relations.GetFirstDirectRelationPawn(relation, p => p.IsFreeNonSlaveColonist);
+        Pawn GetFirstRelationPawn(Pawn pawn) =>
+            PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_Colonists_NoSlaves.Find(colonist => relation.Worker.InRelation(pawn, colonist));
 
-        protected override bool AppliesTo(StatRequest req) => req.Thing is Pawn pawn && pawn.relations != null && GetFirstRelationPawn(pawn) != null;
+        protected override bool AppliesTo(StatRequest req) => req.Thing is Pawn pawn && pawn.relations != null && relation != null && GetFirstRelationPawn(pawn) != null;
 
-        protected override string ExplanationLabel(StatRequest req) => relation != null ? $"{relation.GetGenderSpecificLabelCap(GetFirstRelationPawn((Pawn)req.Thing))} is a colonist" : null;
+        protected override string ExplanationLabel(StatRequest req) => $"{relation.GetGenderSpecificLabelCap(GetFirstRelationPawn((Pawn)req.Thing))} is a colonist";
     }
 }

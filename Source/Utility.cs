@@ -52,7 +52,9 @@ namespace RecruitSlaves
             switch (logLevel)
             {
                 case LogLevel.Message:
+#if !DEBUG
                     if (Prefs.DevMode || Prefs.LogVerbose)
+#endif
                         Verse.Log.Message(message);
                     break;
 

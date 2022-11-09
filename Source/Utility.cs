@@ -19,7 +19,7 @@ namespace RecruitSlaves
         {
             float effort = recruiter.GetStatValue(StatDefOf.NegotiationAbility);
             effort *= slave.needs.mood.thoughts.TotalOpinionOffset(recruiter) / 200 + 1;
-            float difficulty = slave.GetStatValue(DefOf.RecruitmentDifficulty);
+            float difficulty = slave.GetStatValue(DefOf.RecruitmentDifficulty) * Settings.RecruitmentDifficultyMultiplier;
             Log($"Effort: {effort.ToStringPercent()}. Difficulty: {difficulty.ToStringPercent()}. Recruitment chance: {(effort / difficulty).ToStringPercent()}");
             return effort / difficulty;
         }
@@ -52,9 +52,7 @@ namespace RecruitSlaves
             switch (logLevel)
             {
                 case LogLevel.Message:
-#if !DEBUG
-                    if (Prefs.DevMode || Prefs.LogVerbose)
-#endif
+                    if (Settings.DebugLogging)
                         Verse.Log.Message(message);
                     break;
 

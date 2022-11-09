@@ -56,6 +56,8 @@
     <Compile Include="DefOf.cs" />
     <Compile Include="JobDriver_RecruitSlave.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RecruitSlavesMod.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="Stats\StatPart_AverageOpinionOfColonists.cs" />
     <Compile Include="Stats\StatPart_ColonistsCount.cs" />
     <Compile Include="Stats\StatPart_FactorOffset.cs" />

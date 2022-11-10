@@ -36,6 +36,8 @@ namespace RecruitSlaves
             slave.needs.mood.thoughts.memories.TryGainMemory(ThoughtDefOf.RecruitedMe, recruiter);
             if (slave.Faction.IsPlayer)
                 Find.LetterStack.ReceiveLetter($"{slave} recruited", $"{recruiter.NameFullColored} persuaded {slave.NameFullColored} to join {Faction.OfPlayer.NameColored} as a free colonist.", LetterDefOf.PositiveEvent, slave);
+            if (recruiter.InspirationDef == InspirationDefOf.Inspired_Recruitment)
+                recruiter.mindState.inspirationHandler.EndInspiration(InspirationDefOf.Inspired_Recruitment);
 #endif
         }
 
@@ -44,7 +46,7 @@ namespace RecruitSlaves
             Log($"TryRecruit({recruiter}, {slave})");
             Log($"Last suppression tick: {slave.mindState.lastSlaveSuppressedTick}; current tick: {Find.TickManager.TicksGame}");
             slave.mindState.lastSlaveSuppressedTick = Find.TickManager.TicksGame;
-            if (Rand.Chance(SuccessChance(recruiter, slave)))
+            if (recruiter.InspirationDef == InspirationDefOf.Inspired_Recruitment || Rand.Chance(SuccessChance(recruiter, slave)))
                 Recruit(recruiter, slave);
             else Log($"Failed to recruit {slave}.");
         }

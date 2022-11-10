@@ -12,16 +12,16 @@
 			<li>Ludeon.RimWorld.Ideology</li>
 		</showIfModsLoaded>
 		<displayPriorityInCategory>2520</displayPriorityInCategory>
-		<minValue>0.1</minValue>
+		<minValue>0.05</minValue>
 		<toStringStyle>PercentTwo</toStringStyle>
 		<parts>
-			<li Class="RecruitSlaves.StatPart_ColonistsCount">
+			<li Class="RecruitSlaves.StatPart_PopulationIntent">
 				<curve>
 					<points>
+						<li>(-1, 5)</li>
+						<li>(0, 2)</li>
 						<li>(1, 1)</li>
-						<li>(3, 3)</li>
-						<li>(7, 5)</li>
-						<li>(15, 10)</li>
+						<li>(2, 0.4)</li>
 					</points>
 				</curve>
 			</li>
@@ -36,80 +36,80 @@
 			</li>
 			<li Class="RecruitSlaves.StatPart_ColonistRelations">
 				<relation>Parent</relation>
-				<factor>0.7</factor>
+				<factor>0.5</factor>
 			</li>
 			<li Class="RecruitSlaves.StatPart_ColonistRelations" MayRequire="Ludeon.RimWorld.Biotech">
 				<relation>ParentBirth</relation>
-				<factor>0.9</factor>
-			</li>
-			<li Class="RecruitSlaves.StatPart_ColonistRelations">
-				<relation>Child</relation>
-				<factor>0.7</factor>
-			</li>
-			<li Class="RecruitSlaves.StatPart_ColonistRelations">
-				<relation>Sibling</relation>
 				<factor>0.8</factor>
 			</li>
 			<li Class="RecruitSlaves.StatPart_ColonistRelations">
-				<relation>HalfSibling</relation>
-				<factor>0.9</factor>
-			</li>
-			<li Class="RecruitSlaves.StatPart_ColonistRelations">
-				<relation>Grandparent</relation>
-				<factor>0.9</factor>
-			</li>
-			<li Class="RecruitSlaves.StatPart_ColonistRelations">
-				<relation>Grandchild</relation>
-				<factor>0.9</factor>
-			</li>
-			<li Class="RecruitSlaves.StatPart_ColonistRelations">
-				<relation>NephewOrNiece</relation>
-				<factor>0.95</factor>
-			</li>
-			<li Class="RecruitSlaves.StatPart_ColonistRelations">
-				<relation>UncleOrAunt</relation>
-				<factor>0.95</factor>
-			</li>
-			<li Class="RecruitSlaves.StatPart_ColonistRelations">
-				<relation>Spouse</relation>
+				<relation>Child</relation>
 				<factor>0.5</factor>
 			</li>
 			<li Class="RecruitSlaves.StatPart_ColonistRelations">
-				<relation>Fiance</relation>
+				<relation>Sibling</relation>
 				<factor>0.6</factor>
 			</li>
 			<li Class="RecruitSlaves.StatPart_ColonistRelations">
+				<relation>HalfSibling</relation>
+				<factor>0.8</factor>
+			</li>
+			<li Class="RecruitSlaves.StatPart_ColonistRelations">
+				<relation>Grandparent</relation>
+				<factor>0.8</factor>
+			</li>
+			<li Class="RecruitSlaves.StatPart_ColonistRelations">
+				<relation>Grandchild</relation>
+				<factor>0.8</factor>
+			</li>
+			<li Class="RecruitSlaves.StatPart_ColonistRelations">
+				<relation>NephewOrNiece</relation>
+				<factor>0.9</factor>
+			</li>
+			<li Class="RecruitSlaves.StatPart_ColonistRelations">
+				<relation>UncleOrAunt</relation>
+				<factor>0.9</factor>
+			</li>
+			<li Class="RecruitSlaves.StatPart_ColonistRelations">
+				<relation>Spouse</relation>
+				<factor>0.4</factor>
+			</li>
+			<li Class="RecruitSlaves.StatPart_ColonistRelations">
+				<relation>Fiance</relation>
+				<factor>0.5</factor>
+			</li>
+			<li Class="RecruitSlaves.StatPart_ColonistRelations">
 				<relation>Lover</relation>
-				<factor>0.75</factor>
+				<factor>0.6</factor>
 			</li>
 			<li Class="RecruitSlaves.StatPart_ColonistRelations">
 				<relation>ExSpouse</relation>
-				<factor>1.1</factor>
+				<factor>1.2</factor>
 			</li>
 			<li Class="RecruitSlaves.StatPart_ColonistRelations">
 				<relation>ExLover</relation>
-				<factor>1.1</factor>
+				<factor>1.2</factor>
 			</li>
 			<li Class="StatPart_Mood">
 				<factorFromMoodCurve>
 					<points>
-						<li>(0, 1.25)</li>
+						<li>(0, 5)</li>
 						<li>(0.5, 1)</li>
-						<li>(1, 0.8)</li>
+						<li>(1, 0.67)</li>
 					</points>
 				</factorFromMoodCurve>
 			</li>
 			<li Class="StatPart_Rest">
-				<factorExhausted>1.15</factorExhausted>
-				<factorVeryTired>1.1</factorVeryTired>
-				<factorTired>1.05</factorTired>
+				<factorExhausted>1.3</factorExhausted>
+				<factorVeryTired>1.2</factorVeryTired>
+				<factorTired>1.1</factorTired>
 			</li>
 			<li Class="RecruitSlaves.StatPart_TerrorCurve">
 				<curve>
 					<points>
 						<li>(0, 1)</li>
-						<li>(0.25, 2)</li>
-						<li>(1, 3)</li>
+						<li>(0.25, 1.5)</li>
+						<li>(1, 2)</li>
 					</points>
 				</curve>
 			</li>
@@ -118,8 +118,8 @@
 				<humanlikeOnly>true</humanlikeOnly>
 				<curve>
 					<points>
-						<li>(3, 0.1)</li>
-						<li>(13, 0.9)</li>
+						<li>(3, 0.05)</li>
+						<li>(13, 0.8)</li>
 						<li>(18, 1)</li>
 					</points>
 				</curve>
@@ -128,10 +128,10 @@
 				<offset>1</offset>
 			</li>
 			<li Class="RecruitSlaves.StatPart_IdeoDifferentStructure">
-				<factor>1.25</factor>
+				<factor>1.5</factor>
 			</li>
 			<li Class="RecruitSlaves.StatPart_IdeoDifferentCulture">
-				<factor>1.5</factor>
+				<factor>1.75</factor>
 			</li>
 			<li Class="RecruitSlaves.StatPart_IdeoMeme">
 				<meme>Guilty</meme>
@@ -139,45 +139,45 @@
 			</li>
 			<li Class="RecruitSlaves.StatPart_IdeoMeme">
 				<meme>Loyalist</meme>
-				<factor>1.5</factor>
+				<factor>1.75</factor>
 			</li>
 			<li Class="RecruitSlaves.StatPart_IdeoMeme">
 				<meme>Raider</meme>
-				<factor>0.9</factor>
+				<factor>0.8</factor>
 			</li>
 			<li Class="RecruitSlaves.StatPart_IdeoMeme">
 				<meme>Supremacist</meme>
-				<factor>1.5</factor>
+				<factor>1.75</factor>
 			</li>
 			<li Class="RecruitSlaves.StatPart_IdeoPrecept">
 				<precept>IdeoDiversity_Abhorrent</precept>
 				<onlyIfDifferentIdeo>true</onlyIfDifferentIdeo>
-				<factor>1.8</factor>
+				<factor>2</factor>
 			</li>
 			<li Class="RecruitSlaves.StatPart_IdeoPrecept">
 				<precept>IdeoDiversity_Horrible</precept>
 				<onlyIfDifferentIdeo>true</onlyIfDifferentIdeo>
-				<factor>1.6</factor>
+				<factor>1.75</factor>
 			</li>
 			<li Class="RecruitSlaves.StatPart_IdeoPrecept">
 				<precept>IdeoDiversity_Disapproved</precept>
 				<onlyIfDifferentIdeo>true</onlyIfDifferentIdeo>
-				<factor>1.4</factor>
+				<factor>1.5</factor>
 			</li>
 			<li Class="RecruitSlaves.StatPart_IdeoPrecept">
 				<precept>IdeoDiversity_Standard</precept>
 				<onlyIfDifferentIdeo>true</onlyIfDifferentIdeo>
-				<factor>1.2</factor>
+				<factor>1.25</factor>
 			</li>
 			<li Class="RecruitSlaves.StatPart_IdeoPrecept">
 				<precept>IdeoDiversity_Respected</precept>
 				<onlyIfDifferentIdeo>true</onlyIfDifferentIdeo>
-				<factor>0.9</factor>
+				<factor>1</factor>
 			</li>
 			<li Class="RecruitSlaves.StatPart_IdeoPrecept">
 				<precept>IdeoDiversity_Exalted</precept>
 				<onlyIfDifferentIdeo>true</onlyIfDifferentIdeo>
-				<factor>0.8</factor>
+				<factor>0.75</factor>
 			</li>
 		</parts>
 	</StatDef>

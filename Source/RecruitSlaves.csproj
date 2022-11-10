@@ -59,7 +59,7 @@
     <Compile Include="RecruitSlavesMod.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Stats\StatPart_AverageOpinionOfColonists.cs" />
-    <Compile Include="Stats\StatPart_ColonistsCount.cs" />
+    <Compile Include="Stats\StatPart_PopulationIntent.cs" />
     <Compile Include="Stats\StatPart_FactorOffset.cs" />
     <Compile Include="Stats\StatPart_IdeoDifferentCulture.cs" />
     <Compile Include="Stats\StatPart_IdeoDifferentStructure.cs" />

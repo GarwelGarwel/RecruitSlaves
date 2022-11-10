@@ -1,4 +1,5 @@
 ﻿using RimWorld;
+using System.Collections.Generic;
 using Verse;
 
 namespace RecruitSlaves
@@ -35,7 +36,7 @@ namespace RecruitSlaves
             recruiter.records.Increment(DefOf.SlavesRecruited);
             slave.needs.mood.thoughts.memories.TryGainMemory(ThoughtDefOf.RecruitedMe, recruiter);
             if (slave.Faction.IsPlayer)
-                Find.LetterStack.ReceiveLetter($"{slave} recruited", $"{recruiter.NameFullColored} persuaded {slave.NameFullColored} to join {Faction.OfPlayer.NameColored} as a free colonist.", LetterDefOf.PositiveEvent, slave);
+                Find.LetterStack.ReceiveLetter($"{slave} recruited", $"{recruiter.NameShortColored} persuaded {slave.NameShortColored} to join {Faction.OfPlayer.NameColored} as a free colonist.", LetterDefOf.PositiveEvent, slave);
             if (recruiter.InspirationDef == InspirationDefOf.Inspired_Recruitment)
                 recruiter.mindState.inspirationHandler.EndInspiration(InspirationDefOf.Inspired_Recruitment);
 #endif
@@ -46,9 +47,20 @@ namespace RecruitSlaves
             Log($"TryRecruit({recruiter}, {slave})");
             Log($"Last suppression tick: {slave.mindState.lastSlaveSuppressedTick}; current tick: {Find.TickManager.TicksGame}");
             slave.mindState.lastSlaveSuppressedTick = Find.TickManager.TicksGame;
-            if (recruiter.InspirationDef == InspirationDefOf.Inspired_Recruitment || Rand.Chance(SuccessChance(recruiter, slave)))
+            List<RulePackDef> extraPacks = new List<RulePackDef>();
+            float chance = SuccessChance(recruiter, slave);
+            if (recruiter.InspirationDef == InspirationDefOf.Inspired_Recruitment || Rand.Chance(chance))
+            {
                 Recruit(recruiter, slave);
-            else Log($"Failed to recruit {slave}.");
+                extraPacks.Add(RulePackDefOf.Sentence_RecruitAttemptAccepted);
+            }
+            else
+            {
+                Log($"Failed to recruit {slave}.");
+                MoteMaker.ThrowText(slave.DrawPos, slave.Map, $"Recruitment failed ({chance.ToStringPercent()} success chance)", 8);
+                extraPacks.Add(RulePackDefOf.Sentence_RecruitAttemptRejected);
+            }
+            Find.PlayLog.Add(new PlayLogEntry_Interaction(InteractionDefOf.RecruitAttempt, recruiter, slave, extraPacks));
         }
 
         internal static void Log(string message, LogLevel logLevel = LogLevel.Message)

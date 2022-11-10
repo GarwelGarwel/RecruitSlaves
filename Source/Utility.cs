@@ -1,5 +1,4 @@
 ﻿using RimWorld;
-using UnityEngine;
 using Verse;
 
 namespace RecruitSlaves
@@ -32,7 +31,9 @@ namespace RecruitSlaves
 #else
             slave.guest.SetGuestStatus(null);
             GenGuest.SlaveRelease(slave);
+            TaleRecorder.RecordTale(TaleDefOf.Recruited, recruiter, slave);
             recruiter.records.Increment(DefOf.SlavesRecruited);
+            slave.needs.mood.thoughts.memories.TryGainMemory(ThoughtDefOf.RecruitedMe, recruiter);
             if (slave.Faction.IsPlayer)
                 Find.LetterStack.ReceiveLetter($"{slave} recruited", $"{recruiter.NameFullColored} persuaded {slave.NameFullColored} to join {Faction.OfPlayer.NameColored} as a free colonist.", LetterDefOf.PositiveEvent, slave);
 #endif

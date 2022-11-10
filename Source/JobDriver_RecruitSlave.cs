@@ -21,12 +21,11 @@ namespace RecruitSlaves
             this.FailOnForbidden(TargetIndex.A);
             yield return Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.ClosestTouch).FailOn(() => !Slave.IsSlaveOfColony || !Slave.guest.SlaveIsSecure).FailOnSomeonePhysicallyInteracting(TargetIndex.A);
         
-            Toil toil = ToilMaker.MakeToil("TryRecruitSlave");
+            Toil toil = Toils_Interpersonal.TryRecruit(TargetIndex.A);
+            toil.debugName = "TryRecruitSlave";
             toil.initAction = () => Utility.TryRecruit(pawn, Slave);
-            toil.socialMode = RandomSocialMode.Off;
             toil.activeSkill = () => SkillDefOf.Social;
-            toil.defaultCompleteMode = ToilCompleteMode.Delay;
-            toil.defaultDuration = 350;
+
             yield return toil;
         }
     }

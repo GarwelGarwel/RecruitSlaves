@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Defs>
+
+  <RecordDef>
+    <defName>SlavesRecruited</defName>
+    <label>slaves recruited</label>
+    <description>The number of slaves I have recruited.</description>
+    <type>Int</type>
+  </RecordDef>
+  
+</Defs>

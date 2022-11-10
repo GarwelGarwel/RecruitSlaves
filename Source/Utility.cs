@@ -32,8 +32,9 @@ namespace RecruitSlaves
 #else
             slave.guest.SetGuestStatus(null);
             GenGuest.SlaveRelease(slave);
+            recruiter.records.Increment(DefOf.SlavesRecruited);
             if (slave.Faction.IsPlayer)
-                Messages.Message($"{slave} joined the colony as a free colonist.", slave, MessageTypeDefOf.PositiveEvent);
+                Find.LetterStack.ReceiveLetter($"{slave} recruited", $"{recruiter.NameFullColored} persuaded {slave.NameFullColored} to join {Faction.OfPlayer.NameColored} as a free colonist.", LetterDefOf.PositiveEvent, slave);
 #endif
         }
 

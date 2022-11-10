@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 
 <Defs>
-
 	<StatDef>
 		<defName>RecruitmentDifficulty</defName>
 		<label>recruitment difficulty</label>
@@ -15,13 +14,39 @@
 		<minValue>0.05</minValue>
 		<toStringStyle>PercentTwo</toStringStyle>
 		<parts>
-			<li Class="RecruitSlaves.StatPart_PopulationIntent">
+			<li Class="StatPart_WildManOffset">
+				<offset>1</offset>
+			</li>
+			<li Class="StatPart_Mood">
+				<factorFromMoodCurve>
+					<points>
+						<li>(0, 5)</li>
+						<li>(0.5, 1)</li>
+						<li>(1, 0.67)</li>
+					</points>
+				</factorFromMoodCurve>
+			</li>
+			<li Class="StatPart_Rest">
+				<factorExhausted>1.3</factorExhausted>
+				<factorVeryTired>1.2</factorVeryTired>
+				<factorTired>1.1</factorTired>
+			</li>
+			<li Class="RecruitSlaves.StatPart_TerrorCurve">
 				<curve>
 					<points>
-						<li>(-1, 5)</li>
-						<li>(0, 2)</li>
-						<li>(1, 1)</li>
-						<li>(2, 0.4)</li>
+						<li>(0, 1)</li>
+						<li>(1, 2)</li>
+					</points>
+				</curve>
+			</li>
+			<li Class="StatPart_Age" MayRequire="Ludeon.RimWorld.Biotech">
+				<useBiologicalYears>true</useBiologicalYears>
+				<humanlikeOnly>true</humanlikeOnly>
+				<curve>
+					<points>
+						<li>(3, 0.05)</li>
+						<li>(13, 0.8)</li>
+						<li>(18, 1)</li>
 					</points>
 				</curve>
 			</li>
@@ -90,43 +115,6 @@
 				<relation>ExLover</relation>
 				<factor>1.2</factor>
 			</li>
-			<li Class="StatPart_Mood">
-				<factorFromMoodCurve>
-					<points>
-						<li>(0, 5)</li>
-						<li>(0.5, 1)</li>
-						<li>(1, 0.67)</li>
-					</points>
-				</factorFromMoodCurve>
-			</li>
-			<li Class="StatPart_Rest">
-				<factorExhausted>1.3</factorExhausted>
-				<factorVeryTired>1.2</factorVeryTired>
-				<factorTired>1.1</factorTired>
-			</li>
-			<li Class="RecruitSlaves.StatPart_TerrorCurve">
-				<curve>
-					<points>
-						<li>(0, 1)</li>
-						<li>(0.25, 1.5)</li>
-						<li>(1, 2)</li>
-					</points>
-				</curve>
-			</li>
-			<li Class="StatPart_Age" MayRequire="Ludeon.RimWorld.Biotech">
-				<useBiologicalYears>true</useBiologicalYears>
-				<humanlikeOnly>true</humanlikeOnly>
-				<curve>
-					<points>
-						<li>(3, 0.05)</li>
-						<li>(13, 0.8)</li>
-						<li>(18, 1)</li>
-					</points>
-				</curve>
-			</li>
-			<li Class="StatPart_WildManOffset">
-				<offset>1</offset>
-			</li>
 			<li Class="RecruitSlaves.StatPart_IdeoDifferentStructure">
 				<factor>1.5</factor>
 			</li>
@@ -179,7 +167,16 @@
 				<onlyIfDifferentIdeo>true</onlyIfDifferentIdeo>
 				<factor>0.75</factor>
 			</li>
+			<li Class="RecruitSlaves.StatPart_PopulationIntent">
+				<curve>
+					<points>
+						<li>(-1, 5)</li>
+						<li>(0, 2)</li>
+						<li>(1, 1)</li>
+						<li>(2, 0.4)</li>
+					</points>
+				</curve>
+			</li>
 		</parts>
 	</StatDef>
-
 </Defs>

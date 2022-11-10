@@ -19,7 +19,7 @@ namespace RecruitSlaves
         {
             float effort = recruiter.GetStatValue(StatDefOf.NegotiationAbility);
             effort *= slave.needs.mood.thoughts.TotalOpinionOffset(recruiter) / 200 + 1;
-            float difficulty = slave.GetStatValue(DefOf.RecruitmentDifficulty) * Settings.RecruitmentDifficultyMultiplier;
+            float difficulty = slave.GetStatValue(DefOf.RecruitmentDifficulty) * Settings.RecruitmentDifficulty * Settings.RecruitmentDifficultyMultiplier_Base;
             Log($"Effort: {effort.ToStringPercent()}. Difficulty: {difficulty.ToStringPercent()}. Recruitment chance: {(effort / difficulty).ToStringPercent()}");
             return effort / difficulty;
         }
@@ -40,7 +40,8 @@ namespace RecruitSlaves
         public static void TryRecruit(Pawn recruiter, Pawn slave)
         {
             Log($"TryRecruit({recruiter}, {slave})");
-            Log($"Slave's resistance: {slave.guest.Resistance}; will: {slave.guest.will}");
+            Log($"Last suppression tick: {slave.mindState.lastSlaveSuppressedTick}; current tick: {Find.TickManager.TicksGame}");
+            slave.mindState.lastSlaveSuppressedTick = Find.TickManager.TicksGame;
             if (Rand.Chance(SuccessChance(recruiter, slave)))
                 Recruit(recruiter, slave);
             else Log($"Failed to recruit {slave}.");

@@ -14,8 +14,23 @@ namespace RecruitSlaves
             Listing_Standard content = new Listing_Standard();
             content.Begin(inRect);
 
-            Settings.RecruitmentDifficultyMultiplier = Mathf.Round(content.SliderLabeled($"Recruitment Difficulty Multiplier: {Settings.RecruitmentDifficultyMultiplier}", Settings.RecruitmentDifficultyMultiplier, 0.1f, 10, tooltip: $"Relative difficulty of successfully recruiting a slave. Default: {Settings.RecruitmentDifficultyMultiplier_Default}") * 10) / 10;
-            content.CheckboxLabeled("Debug Logging", ref Settings.DebugLogging, "Check to enable verbose logging; it is necessary to report bugs");
+            Settings.RecruitmentDifficulty = Mathf.Round(Mathf.Pow(10, content.SliderLabeled(
+                $"Recruitment difficulty multiplier: {(Settings.RecruitmentDifficulty * Settings.RecruitmentDifficultyMultiplier_Base).ToStringDecimalIfSmall()}",
+                Mathf.Log10(Settings.RecruitmentDifficulty),
+                -1,
+                1,
+                0.3f,
+                $"The chance to recruit a slave is divided by this number. Default: {Settings.RecruitmentDifficultyMultiplier_Base}.")) * Settings.RecruitmentDifficultyMultiplier_Base) / Settings.RecruitmentDifficultyMultiplier_Base;
+
+            Settings.RecruitmentAttemptCooldown = Mathf.RoundToInt(content.SliderLabeled(
+                $"Recruitment attempt cooldown: {Settings.RecruitmentAttemptCooldown} h",
+                Settings.RecruitmentAttemptCooldown,
+                0,
+                120,
+                0.3f,
+                $"How many hours should pass from the last interaction with the slave to try to recruit them. Default: {Settings.RecruitmentAttemptCooldown_Default}.") / 6) * 6;
+            
+            content.CheckboxLabeled("Debug Logging", ref Settings.DebugLogging, "Check to enable verbose logging; it is necessary to report bugs.");
 
             if (content.ButtonText("Reset to default"))
                 Settings.Reset();

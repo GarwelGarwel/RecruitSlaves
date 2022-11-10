@@ -1,4 +1,5 @@
-﻿using Verse;
+﻿using RimWorld;
+using Verse;
 
 using static RecruitSlaves.Utility;
 
@@ -6,15 +7,20 @@ namespace RecruitSlaves
 {
     public class Settings : ModSettings
     {
-        public static float RecruitmentDifficultyMultiplier = RecruitmentDifficultyMultiplier_Default;
+        public static float RecruitmentDifficulty = 1;
+        public static int RecruitmentAttemptCooldown = RecruitmentAttemptCooldown_Default;
         public static bool DebugLogging = Prefs.DevMode;
 
-        internal const float RecruitmentDifficultyMultiplier_Default = 5;
+        public const float RecruitmentDifficultyMultiplier_Base = 10;
+        public const int RecruitmentAttemptCooldown_Default = 24;
+
+        public static int RecruitmentAttemptCooldownTicks => RecruitmentAttemptCooldown * GenDate.TicksPerHour;
 
         public override void ExposeData()
         {
             base.ExposeData();
-            Scribe_Values.Look(ref RecruitmentDifficultyMultiplier, "RecruitmentDifficultyMultiplier", RecruitmentDifficultyMultiplier_Default);
+            Scribe_Values.Look(ref RecruitmentDifficulty, "RecruitmentDifficulty", 1);
+            Scribe_Values.Look(ref RecruitmentAttemptCooldown, "RecruitmentAttemptCooldown", RecruitmentAttemptCooldown_Default);
             Scribe_Values.Look(ref DebugLogging, "DebugLogging");
             if (Scribe.mode == LoadSaveMode.LoadingVars)
                 Print();
@@ -23,7 +29,8 @@ namespace RecruitSlaves
         public static void Reset()
         {
             Log($"Resetting settings.");
-            RecruitmentDifficultyMultiplier = RecruitmentDifficultyMultiplier_Default;
+            RecruitmentDifficulty = 1;
+            RecruitmentAttemptCooldown = RecruitmentAttemptCooldown_Default;
             Print();
         }
 
@@ -31,7 +38,8 @@ namespace RecruitSlaves
         {
             if (!DebugLogging)
                 return;
-            Log($"RecruitmentDifficultyMultiplier: {RecruitmentDifficultyMultiplier}");
+            Log($"RecruitmentDifficulty: {RecruitmentDifficulty}");
+            Log($"RecruitmentAttemptCooldown: {RecruitmentAttemptCooldown}");
         }
     }
 }

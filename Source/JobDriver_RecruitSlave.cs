@@ -13,12 +13,6 @@ namespace RecruitSlaves
 
         protected override IEnumerable<Toil> MakeNewToils()
         {
-            if (!ModLister.IdeologyInstalled)
-            {
-                Utility.Log($"Trying to MakeNewToils for {pawn} to recruit {Slave}, but there is no Ideology installed.", LogLevel.Error);
-                yield return null;
-            }
-
             Utility.Log($"Recruiting {Slave}.");
             this.FailOnDestroyedOrNull(TargetIndex.A);
             this.FailOn(() => Slave.guest.slaveInteractionMode != DefOf.Recruit);
@@ -29,7 +23,7 @@ namespace RecruitSlaves
         
             Toil toil = ToilMaker.MakeToil("TryRecruitSlave");
             toil.initAction = () => Utility.TryRecruit(pawn, Slave);
-            toil.socialMode = RimWorld.RandomSocialMode.Off;
+            toil.socialMode = RandomSocialMode.Off;
             toil.activeSkill = () => SkillDefOf.Social;
             toil.defaultCompleteMode = ToilCompleteMode.Delay;
             toil.defaultDuration = 350;

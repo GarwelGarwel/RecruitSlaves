@@ -25,7 +25,7 @@ namespace RecruitSlaves
             return effort / difficulty;
         }
 
-        public static void Recruit(Pawn recruiter, Pawn slave)
+        public static void DoRecruit(Pawn recruiter, Pawn slave)
         {
 #if DEBUG
             Log($"The recruitment was successful, but not enforcing it due to being in DEBUG mode.");
@@ -49,10 +49,11 @@ namespace RecruitSlaves
             Log($"Last suppression tick: {slave.mindState.lastSlaveSuppressedTick}; current tick: {Find.TickManager.TicksGame}");
             slave.mindState.lastSlaveSuppressedTick = Find.TickManager.TicksGame;
             List<RulePackDef> extraPacks = new List<RulePackDef>();
+
             float chance = Mathf.Clamp(SuccessChance(recruiter, slave), 0.01f, 0.9f);
             if (recruiter.InspirationDef == InspirationDefOf.Inspired_Recruitment || Rand.Chance(chance))
             {
-                Recruit(recruiter, slave);
+                DoRecruit(recruiter, slave);
                 extraPacks.Add(RulePackDefOf.Sentence_RecruitAttemptAccepted);
             }
             else
@@ -61,6 +62,7 @@ namespace RecruitSlaves
                 MoteMaker.ThrowText(slave.DrawPos, slave.Map, $"Recruitment failed ({chance.ToStringPercent()} success chance)", 8);
                 extraPacks.Add(RulePackDefOf.Sentence_RecruitAttemptRejected);
             }
+
             Find.PlayLog.Add(new PlayLogEntry_Interaction(InteractionDefOf.RecruitAttempt, recruiter, slave, extraPacks));
         }
 

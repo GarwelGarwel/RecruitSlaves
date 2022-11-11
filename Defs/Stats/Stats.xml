@@ -7,9 +7,6 @@
 		<description>How hard it is to recruit this slave to join the colony voluntarily. The actual recruitment chance also depends on the recruiter's negotiation ability and their relations with the slave.</description>
 		<category>PawnSocial</category>
 		<showOnSlavesOnly>true</showOnSlavesOnly>
-		<showIfModsLoaded>
-			<li>Ludeon.RimWorld.Ideology</li>
-		</showIfModsLoaded>
 		<displayPriorityInCategory>2520</displayPriorityInCategory>
 		<minValue>0.05</minValue>
 		<toStringStyle>PercentTwo</toStringStyle>
@@ -53,9 +50,9 @@
 			<li Class="RecruitSlaves.StatPart_AverageOpinionOfColonists">
 				<curve>
 					<points>
-						<li>(-100, 10)</li>
+						<li>(-100, 5)</li>
 						<li>(0, 1)</li>
-						<li>(100, 0.5)</li>
+						<li>(100, 0.75)</li>
 					</points>
 				</curve>
 			</li>
@@ -170,10 +167,11 @@
 			<li Class="RecruitSlaves.StatPart_PopulationIntent">
 				<curve>
 					<points>
-						<li>(-1, 5)</li>
-						<li>(0, 2)</li>
-						<li>(1, 1)</li>
-						<li>(2, 0.4)</li>
+						<li>(-1, 10)</li>
+						<li>(0, 4)</li>
+						<li>(1, 2)</li>
+						<li>(2, 1)</li>
+						<li>(8, 0.5)</li>
 					</points>
 				</curve>
 			</li>

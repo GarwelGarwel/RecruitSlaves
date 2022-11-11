@@ -7,8 +7,8 @@ namespace RecruitSlaves
     {
         protected override bool AppliesTo(StatRequest req) => true;
 
-        protected override float CurveXGetter(StatRequest req) => StorytellerUtilityPopulation.PopulationIntent;//PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_Colonists_NoSlaves.Count;
+        protected override float CurveXGetter(StatRequest req) => StorytellerUtilityPopulation.PopulationIntent;
 
-        protected override string ExplanationLabel(StatRequest req) => $"Storyteller intent ({CurveXGetter(req).ToStringWithSign()})";
+        protected override string ExplanationLabel(StatRequest req) => Prefs.DevMode ? $"Storyteller pop intent ({CurveXGetter(req).ToStringWithSign()})" : "Storyteller";
     }
 }

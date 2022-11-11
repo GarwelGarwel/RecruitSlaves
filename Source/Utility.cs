@@ -1,5 +1,6 @@
 ﻿using RimWorld;
 using System.Collections.Generic;
+using UnityEngine;
 using Verse;
 
 namespace RecruitSlaves
@@ -48,7 +49,7 @@ namespace RecruitSlaves
             Log($"Last suppression tick: {slave.mindState.lastSlaveSuppressedTick}; current tick: {Find.TickManager.TicksGame}");
             slave.mindState.lastSlaveSuppressedTick = Find.TickManager.TicksGame;
             List<RulePackDef> extraPacks = new List<RulePackDef>();
-            float chance = SuccessChance(recruiter, slave);
+            float chance = Mathf.Clamp(SuccessChance(recruiter, slave), 0.01f, 0.9f);
             if (recruiter.InspirationDef == InspirationDefOf.Inspired_Recruitment || Rand.Chance(chance))
             {
                 Recruit(recruiter, slave);

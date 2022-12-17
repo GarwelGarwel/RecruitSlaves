@@ -12,7 +12,7 @@ namespace RecruitSlaves
         protected override float CurveXGetter(StatRequest req) =>
             (float)PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_Colonists_NoSlaves
             .Where(pawn => pawn != req.Thing)
-            .Select(pawn => ((Pawn)req.Thing).needs.mood.thoughts.TotalOpinionOffset(pawn))
+            .Select(pawn => Mathf.Clamp(((Pawn)req.Thing).needs.mood.thoughts.TotalOpinionOffset(pawn), -100, 100))
             .Average();
 
         protected override string ExplanationLabel(StatRequest req) => $"Opinion of colonists ({Mathf.RoundToInt(CurveXGetter(req)).ToStringWithSign()})";

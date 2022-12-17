@@ -2,8 +2,8 @@
 
 <Defs>
 	<StatDef>
-		<defName>RecruitmentDifficulty</defName>
-		<label>recruitment difficulty</label>
+		<defName>SlaveRecruitmentDifficulty</defName>
+		<label>slave recruitment difficulty</label>
 		<description>How hard it is to recruit this slave to join the colony voluntarily. The actual recruitment chance also depends on the recruiter's negotiation ability and their relations with the slave.</description>
 		<category>PawnSocial</category>
 		<showOnSlavesOnly>true</showOnSlavesOnly>

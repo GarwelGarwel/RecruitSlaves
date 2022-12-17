@@ -19,7 +19,10 @@ namespace RecruitSlaves
             this.FailOnDowned(TargetIndex.A);
             this.FailOnAggroMentalState(TargetIndex.A);
             this.FailOnForbidden(TargetIndex.A);
-            yield return Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.ClosestTouch).FailOn(() => !Slave.IsSlaveOfColony || !Slave.guest.SlaveIsSecure).FailOnSomeonePhysicallyInteracting(TargetIndex.A);
+            yield return Toils_Goto
+                .GotoThing(TargetIndex.A, PathEndMode.ClosestTouch)
+                .FailOn(() => !Slave.IsSlaveOfColony || !Slave.guest.SlaveIsSecure)
+                .FailOnSomeonePhysicallyInteracting(TargetIndex.A);
         
             Toil toil = Toils_Interpersonal.TryRecruit(TargetIndex.A);
             toil.debugName = "TryRecruitSlave";

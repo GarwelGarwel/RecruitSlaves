@@ -7,14 +7,16 @@ namespace RecruitSlaves
 {
     public class Settings : ModSettings
     {
-        public static float RecruitmentDifficulty = 1;
-        public static int RecruitmentAttemptCooldown = RecruitmentAttemptCooldown_Default;
+        public static float RecruitmentDifficulty;
+        public static int RecruitmentAttemptCooldown;
         public static bool DebugLogging = Prefs.DevMode;
 
         public const float RecruitmentDifficultyMultiplier_Base = 10;
         public const int RecruitmentAttemptCooldown_Default = 24;
 
         public static int RecruitmentAttemptCooldownTicks => RecruitmentAttemptCooldown * GenDate.TicksPerHour;
+
+        public Settings() => Reset();
 
         public override void ExposeData()
         {

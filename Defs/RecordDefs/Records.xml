@@ -2,11 +2,19 @@
 
 <Defs>
 
-  <RecordDef>
-    <defName>SlavesRecruited</defName>
-    <label>slaves recruited</label>
-    <description>The number of slaves I have recruited.</description>
-    <type>Int</type>
-  </RecordDef>
-  
+	<RecordDef>
+		<defName>TimeAsColonySlave</defName>
+		<label>time as a slave</label>
+		<description>Total time spent as a slave of the colony.</description>
+		<type>Time</type>
+		<workerClass>RecruitSlaves.RecordWorker_TimeAsColonySlave</workerClass>
+	</RecordDef>
+
+	<RecordDef>
+		<defName>SlavesRecruited</defName>
+		<label>slaves recruited</label>
+		<description>The number of slaves I have recruited.</description>
+		<type>Int</type>
+	</RecordDef>
+
 </Defs>

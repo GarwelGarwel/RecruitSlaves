@@ -19,7 +19,7 @@ namespace RecruitSlaves
         public static float SuccessChance(Pawn recruiter, Pawn slave)
         {
             float effort = recruiter.GetStatValue(StatDefOf.NegotiationAbility);
-            effort *= slave.needs.mood.thoughts.TotalOpinionOffset(recruiter) / 200 + 1;
+            effort *= Mathf.Clamp(slave.needs.mood.thoughts.TotalOpinionOffset(recruiter), -100, 100) / 200 + 1;
             float difficulty = slave.GetStatValue(DefOf.SlaveRecruitmentDifficulty) * Settings.RecruitmentDifficulty * Settings.RecruitmentDifficultyMultiplier_Base;
             Log($"Effort: {effort.ToStringPercent()}. Difficulty: {difficulty.ToStringPercent()}. Recruitment chance: {(effort / difficulty).ToStringPercent()}");
             return effort / difficulty;

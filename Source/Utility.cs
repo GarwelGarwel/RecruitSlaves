@@ -50,8 +50,8 @@ namespace RecruitSlaves
             slave.mindState.lastSlaveSuppressedTick = Find.TickManager.TicksGame;
             List<RulePackDef> extraPacks = new List<RulePackDef>();
 
-            float chance = Mathf.Clamp(SuccessChance(recruiter, slave), 0.01f, 0.9f);
-            if (recruiter.InspirationDef == InspirationDefOf.Inspired_Recruitment || Rand.Chance(chance))
+            float chance;
+            if (recruiter.InspirationDef == InspirationDefOf.Inspired_Recruitment || Rand.Chance(chance = Mathf.Clamp(SuccessChance(recruiter, slave), 0.01f, 0.9f)))
             {
                 DoRecruit(recruiter, slave);
                 extraPacks.Add(RulePackDefOf.Sentence_RecruitAttemptAccepted);
@@ -61,6 +61,13 @@ namespace RecruitSlaves
                 Log($"Failed to recruit {slave}.");
                 MoteMaker.ThrowText(slave.DrawPos, slave.Map, $"Recruitment failed ({chance.ToStringPercent()} success chance)", 8);
                 extraPacks.Add(RulePackDefOf.Sentence_RecruitAttemptRejected);
+                Need_Suppression suppression = slave.needs.TryGetNeed<Need_Suppression>();
+                if (suppression != null && suppression.CurLevel < Settings.KeepMinSuppression)
+                {
+                    Log($"{slave}'s suppression is {suppression.CurLevel.ToStringPercent()} < {Settings.KeepMinSuppression.ToStringPercent()}. Switching interaction mode to Suppression.");
+                    slave.guest.slaveInteractionMode = SlaveInteractionModeDefOf.Suppress;
+                    Messages.Message($"{slave}'s recruitment has stopped, because {slave.Possessive()} suppression is too low.", new LookTargets(slave), MessageTypeDefOf.NeutralEvent, false);
+                }
             }
 
             Find.PlayLog.Add(new PlayLogEntry_Interaction(InteractionDefOf.RecruitAttempt, recruiter, slave, extraPacks));

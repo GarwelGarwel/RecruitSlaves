@@ -29,7 +29,14 @@ namespace RecruitSlaves
                 120,
                 0.3f,
                 $"How many hours should pass from the last interaction with the slave to try to recruit them. Default: {Settings.RecruitmentAttemptCooldown_Default}.") / 6) * 6;
-            
+
+            Settings.KeepMinSuppression = Mathf.Round(content.SliderLabeled($"Keep minimum suppression: {Settings.KeepMinSuppression.ToStringPercent()}",
+             Settings.KeepMinSuppression,
+             0,
+             1,
+             0.3f,
+             "Slave interaction mode will automatically switch to \"Suppress\" after an unsuccessful recruit attempt if the slave's Suppression is below this value. Set to 0 to disable.") * 20) / 20;
+
             content.CheckboxLabeled("Debug Logging", ref Settings.DebugLogging, "Check to enable verbose logging; it is necessary to report bugs.");
 
             if (content.ButtonText("Reset to default"))

@@ -9,6 +9,7 @@ namespace RecruitSlaves
     {
         public static float RecruitmentDifficulty;
         public static int RecruitmentAttemptCooldown;
+        public static float KeepMinSuppression;
         public static bool DebugLogging = Prefs.DevMode;
 
         public const float RecruitmentDifficultyMultiplier_Base = 10;
@@ -23,6 +24,7 @@ namespace RecruitSlaves
             base.ExposeData();
             Scribe_Values.Look(ref RecruitmentDifficulty, "RecruitmentDifficulty", 1);
             Scribe_Values.Look(ref RecruitmentAttemptCooldown, "RecruitmentAttemptCooldown", RecruitmentAttemptCooldown_Default);
+            Scribe_Values.Look(ref KeepMinSuppression, "KeepMinSuppression");
             Scribe_Values.Look(ref DebugLogging, "DebugLogging");
             if (Scribe.mode == LoadSaveMode.LoadingVars)
                 Print();
@@ -33,6 +35,7 @@ namespace RecruitSlaves
             Log($"Resetting settings.");
             RecruitmentDifficulty = 1;
             RecruitmentAttemptCooldown = RecruitmentAttemptCooldown_Default;
+            KeepMinSuppression = 0;
             Print();
         }
 
@@ -42,6 +45,7 @@ namespace RecruitSlaves
                 return;
             Log($"RecruitmentDifficulty: {RecruitmentDifficulty}");
             Log($"RecruitmentAttemptCooldown: {RecruitmentAttemptCooldown}");
+            Log($"KeepMinSuppression: {KeepMinSuppression}");
         }
     }
 }

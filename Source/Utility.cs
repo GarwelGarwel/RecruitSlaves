@@ -54,6 +54,7 @@ namespace RecruitSlaves
             if (recruiter.InspirationDef == InspirationDefOf.Inspired_Recruitment || Rand.Chance(chance = Mathf.Clamp(SuccessChance(recruiter, slave), 0.01f, 0.9f)))
             {
                 DoRecruit(recruiter, slave);
+                recruiter.mindState.inspirationHandler.EndInspiration(InspirationDefOf.Inspired_Recruitment);
                 extraPacks.Add(RulePackDefOf.Sentence_RecruitAttemptAccepted);
             }
             else

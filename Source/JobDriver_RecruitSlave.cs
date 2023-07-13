@@ -13,20 +13,23 @@ namespace RecruitSlaves
 
         protected override IEnumerable<Toil> MakeNewToils()
         {
-            Utility.Log($"Recruiting {Slave}.");
+            Pawn slave = Slave;
+            Utility.Log($"Recruiting {slave}.");
             this.FailOnDestroyedOrNull(TargetIndex.A);
-            this.FailOn(() => Slave.guest.slaveInteractionMode != DefOf.Recruit);
+            this.FailOn(() => slave.guest.slaveInteractionMode != DefOf.Recruit);
+            this.FailOn(() => slave.mindState.lastSlaveSuppressedTick > Find.TickManager.TicksGame - Settings.RecruitmentAttemptCooldownTicks);
             this.FailOnDowned(TargetIndex.A);
             this.FailOnAggroMentalState(TargetIndex.A);
             this.FailOnForbidden(TargetIndex.A);
+
             yield return Toils_Goto
                 .GotoThing(TargetIndex.A, PathEndMode.ClosestTouch)
-                .FailOn(() => !Slave.IsSlaveOfColony || !Slave.guest.SlaveIsSecure)
+                .FailOn(() => !slave.IsSlaveOfColony || !slave.guest.SlaveIsSecure)
                 .FailOnSomeonePhysicallyInteracting(TargetIndex.A);
         
             Toil toil = Toils_Interpersonal.TryRecruit(TargetIndex.A);
             toil.debugName = "TryRecruitSlave";
-            toil.initAction = () => Utility.TryRecruit(pawn, Slave);
+            toil.initAction = () => Utility.TryRecruit(pawn, slave);
             toil.activeSkill = () => SkillDefOf.Social;
 
             yield return toil;

@@ -39,7 +39,7 @@ namespace RecruitSlaves
             Print();
         }
 
-        static void Print()
+        public static void Print()
         {
             if (!DebugLogging)
                 return;

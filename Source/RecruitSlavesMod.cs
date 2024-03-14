@@ -44,5 +44,11 @@ namespace RecruitSlaves
 
             content.End();
         }
+
+        public override void WriteSettings()
+        {
+            base.WriteSettings();
+            Settings.Print();
+        }
     }
 }

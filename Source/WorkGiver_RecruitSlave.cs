@@ -13,7 +13,7 @@ namespace RecruitSlaves
             if (pawn.IsSlave)
                 return null;
             Pawn target = t as Pawn;
-            if (target.guest.slaveInteractionMode != DefOf.Recruit || target.Downed || !target.Awake())
+            if (target == null || target.guest.slaveInteractionMode != DefOf.Recruit || target.Downed || !target.Awake() || !pawn.CanReserve(target))
                 return null;
             if (!target.guest.Recruitable)
             {
@@ -22,11 +22,15 @@ namespace RecruitSlaves
                 Messages.Message($"{target} is not recruitable.", target, MessageTypeDefOf.RejectInput, false);
                 return null;
             }
-            if (target.mindState.lastSlaveSuppressedTick > Find.TickManager.TicksGame - Settings.RecruitmentAttemptCooldownTicks)
+            Need_Suppression suppression = target.needs.TryGetNeed<Need_Suppression>();
+            if (suppression != null && suppression.CurLevel < Settings.KeepMinSuppression && target.guest.ScheduledForSlaveSuppression)
+            {
+                Utility.Log($"{target}'s suppression is {suppression.CurLevel.ToStringPercent()} < {Settings.KeepMinSuppression.ToStringPercent()}. Assigning a suppression job instead of recruitment.");
+                return JobMaker.MakeJob(JobDefOf.SlaveSuppress, target);
+            }
+            if (target.mindState.lastSlaveSuppressedTick >= Find.TickManager.TicksGame - Settings.RecruitmentAttemptCooldownTicks)
                 return null;
-            Job job = JobMaker.MakeJob(DefOf.Job_RecruitSlave, target);
-            job.count = 1;
-            return job;
+            return JobMaker.MakeJob(DefOf.Job_RecruitSlave, target);
         }
     }
 }

@@ -16,7 +16,12 @@ namespace RecruitSlaves
             if (target.guest.slaveInteractionMode != DefOf.Recruit || target.Downed || !target.Awake())
                 return null;
             if (!target.guest.Recruitable)
+            {
+                Utility.Log($"{target} is not recruitable. Disabling Recruit slave interaction mode.");
+                target.guest.slaveInteractionMode = SlaveInteractionModeDefOf.Suppress;
+                Messages.Message($"{target} is not recruitable.", target, MessageTypeDefOf.RejectInput, false);
                 return null;
+            }
             if (target.mindState.lastSlaveSuppressedTick > Find.TickManager.TicksGame - Settings.RecruitmentAttemptCooldownTicks)
                 return null;
             Job job = JobMaker.MakeJob(DefOf.Job_RecruitSlave, target);

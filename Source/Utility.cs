@@ -67,7 +67,7 @@ namespace RecruitSlaves
                 {
                     Log($"{slave}'s suppression is {suppression.CurLevel.ToStringPercent()} < {Settings.KeepMinSuppression.ToStringPercent()}. Switching interaction mode to Suppression.");
                     slave.guest.slaveInteractionMode = SlaveInteractionModeDefOf.Suppress;
-                    Messages.Message($"{slave}'s recruitment has stopped, because {slave.Possessive()} suppression is too low.", new LookTargets(slave), MessageTypeDefOf.NeutralEvent, false);
+                    Messages.Message($"{slave}'s recruitment has stopped, because {slave.Possessive()} suppression is too low.", slave, MessageTypeDefOf.NeutralEvent, false);
                 }
             }
 

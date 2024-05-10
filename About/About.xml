@@ -11,15 +11,17 @@
 	</supportedVersions>
 	<description>This mod lets you recruit slaves in a balanced way without having to imprison them first.
 
-How to use: choose "Recruit" interaction option in the Slave tab for the slave you want to recruit. Then a colonist assigned to warden jobs will start approaching the slave and trying to recruit them. The chance of success depends on many factors including the slave's mood, ideoligion, relations with the recruiter and the other colonists, the storyteller's intent and the recruiter's negotiation ability. I recommend to check Recruitment Difficulty stat for the slave before you start recruiting them. Recruitment can only be attempted at least a day after the last such attempt or suppression, so you can't suppress the slave and invite them to join you voluntarily at the same time.
+How to use: choose "Recruit" interaction option in the Slave tab for the slave you want to recruit. Then a colonist assigned to warden jobs will start approaching the slave and trying to recruit them. The chance of success depends on many factors including the slave's mood, ideoligion, relations with the recruiter and the other colonists, the storyteller's intent (can be disabled in the settings) and the recruiter's negotiation ability. I recommend to check Recruitment Difficulty stat for the slave before you start recruiting them. Recruitment can only be attempted at least a day after the last such attempt or suppression.
 
-You can change recruitment difficulty and cooldown in the Settings.
+When the slave's suppression falls too low (below 70% by default, adjustable in the settings), the pawns will first suppress the slave and only then attempt to recruit them.
 
 Also adds a new record, "Time as a colony slave", which the vanilla game inexplicably lacks.
 
 Ideology DLC is required. Should be compatible with most mods.
 
 The mod can be installed in an active save. Removing it will probably cause a one-time error if any slaves are currently marked for recruitment, but shouldn't break your game.
+
+Icon designed by Freepik.
 </description>
 	<modDependencies>
 		<li>

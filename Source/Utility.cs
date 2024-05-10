@@ -27,10 +27,6 @@ namespace RecruitSlaves
 
         public static void DoRecruit(Pawn recruiter, Pawn slave)
         {
-#if DEBUG
-            Log($"The recruitment was successful, but not enforcing it due to being in DEBUG mode.");
-            return;
-#else
             slave.guest.SetGuestStatus(null);
             GenGuest.SlaveRelease(slave);
             TaleRecorder.RecordTale(TaleDefOf.Recruited, recruiter, slave);
@@ -40,13 +36,11 @@ namespace RecruitSlaves
                 Find.LetterStack.ReceiveLetter($"{slave} recruited", $"{recruiter.NameShortColored} persuaded {slave.NameShortColored} to join {Faction.OfPlayer.NameColored} as a free colonist.", LetterDefOf.PositiveEvent, slave);
             if (recruiter.InspirationDef == InspirationDefOf.Inspired_Recruitment)
                 recruiter.mindState.inspirationHandler.EndInspiration(InspirationDefOf.Inspired_Recruitment);
-#endif
         }
 
         public static void TryRecruit(Pawn recruiter, Pawn slave)
         {
             Log($"TryRecruit({recruiter}, {slave})");
-            Log($"Last suppression tick: {slave.mindState.lastSlaveSuppressedTick}; current tick: {Find.TickManager.TicksGame}");
             slave.mindState.lastSlaveSuppressedTick = Find.TickManager.TicksGame;
             List<RulePackDef> extraPacks = new List<RulePackDef>();
 

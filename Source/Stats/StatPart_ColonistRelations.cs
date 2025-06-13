@@ -8,7 +8,7 @@ namespace RecruitSlaves
         public PawnRelationDef relation;
 
         Pawn GetFirstRelationPawn(Pawn pawn) =>
-            PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_Colonists_NoSlaves.Find(colonist => relation.Worker.InRelation(pawn, colonist));
+            PawnsFinder.AllMapsCaravansAndTravellingTransporters_Alive_Colonists_NoSlaves.Find(colonist => relation.Worker.InRelation(pawn, colonist));
 
         protected override bool AppliesTo(StatRequest req) => req.Thing is Pawn pawn && pawn.relations != null && relation != null && GetFirstRelationPawn(pawn) != null;
 

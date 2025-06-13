@@ -10,7 +10,7 @@ namespace RecruitSlaves
         protected override bool AppliesTo(StatRequest req) => req.Thing is Pawn pawn && pawn.needs?.mood?.thoughts != null;
 
         protected override float CurveXGetter(StatRequest req) =>
-            (float)PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_Colonists_NoSlaves
+            (float)PawnsFinder.AllMapsCaravansAndTravellingTransporters_Alive_Colonists_NoSlaves
             .Where(pawn => pawn != req.Thing)
             .Select(pawn => Mathf.Clamp(((Pawn)req.Thing).needs.mood.thoughts.TotalOpinionOffset(pawn), -100, 100))
             .Average();
